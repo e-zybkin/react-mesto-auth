@@ -1,6 +1,10 @@
 import React from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import ImagePopup from '../ImagePopup/ImagePopup';
 import EditProfilePopup from '../EditProfilePopup/EditProfilePopup';
@@ -9,6 +13,7 @@ import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
 import DeleteCardPopup from '../DeleteCardPopup/DeleteCardPopup';
 import api from '../../utils/api';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { Route, Routes } from 'react-router-dom';
 
 
 function App() {
@@ -128,55 +133,76 @@ function App() {
   }
 
   return (
-	<div className="page">
-		<div className="wrapper">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header />
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-          onDeleteButton={handleDeleteButtonClick}
-        />
-        <Footer />
+    <div className="page">
+      <div className="wrapper">
+        <CurrentUserContext.Provider value={currentUser}>
+          <Header />
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <Main
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                cards={cards}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+                onDeleteButton={handleDeleteButtonClick}
+                />
+              }
+            />
 
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
+            <Route
+              path='/sign-up'
+              element={
+                <Register />
+              }
+            />
 
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        />
+            <Route
+              path='/sign-in'
+              element={
+                <Login />
+              }
+            />
+          </Routes>
+          <Footer />
 
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddCard={handleAddCard}
-        />
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
 
-        <ImagePopup
-          card={selectedCard}
-          isOpen={isImagePopupOpen}
-          onClose={closeAllPopups}
-        />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
 
-        <DeleteCardPopup
-          card={selectedCard}
-          isOpen={isDeletePopupOpen}
-          onClose={closeAllPopups}
-          onCardDelete={handleCardDelete}
-        />
-      </CurrentUserContext.Provider>
-		</div>
- 	</div>
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddCard={handleAddCard}
+          />
+
+          <ImagePopup
+            card={selectedCard}
+            isOpen={isImagePopupOpen}
+            onClose={closeAllPopups}
+          />
+
+          <DeleteCardPopup
+            card={selectedCard}
+            isOpen={isDeletePopupOpen}
+            onClose={closeAllPopups}
+            onCardDelete={handleCardDelete}
+          />
+        </CurrentUserContext.Provider>
+      </div>
+    </div>
   );
 }
 
