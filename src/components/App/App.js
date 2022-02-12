@@ -5,7 +5,6 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import Footer from '../Footer/Footer';
 import ImagePopup from '../ImagePopup/ImagePopup';
 import EditProfilePopup from '../EditProfilePopup/EditProfilePopup';
 import EditAvatarPopup from '../EditAvatarPopup/EditAvatarPopup';
@@ -168,7 +167,6 @@ function App() {
               }
             />
           </Routes>
-          {/*<Footer />*/}
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
@@ -199,6 +197,10 @@ function App() {
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
             onCardDelete={handleCardDelete}
+          />
+
+          <InfoTooltip
+            
           />
         </CurrentUserContext.Provider>
       </div>
