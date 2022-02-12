@@ -48,3 +48,11 @@
 @import url(./blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(./blocks/popup/__save-btn/popup__save-btn.css);
 @import url(./blocks/popup/__save-btn/_disabled/popup__save-btn_disabled.css);
+
+@import url(./blocks/pre-main/pre-main.css);
+@import url(./blocks/pre-main/__form/pre-main__form.css);
+@import url(./blocks/pre-main/__input/pre-main__input.css);
+@import url(./blocks/pre-main/__subButton/pre-main__subButton.css);
+@import url(./blocks/pre-main/__title/pre-main__title.css);
+@import url(./blocks/sign-in/sign-in.css);
+@import url(./blocks/sign-in/__link/sign-in__link.css);

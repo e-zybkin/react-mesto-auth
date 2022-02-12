@@ -168,7 +168,7 @@ function App() {
               }
             />
           </Routes>
-          <Footer />
+          {/*<Footer />*/}
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}

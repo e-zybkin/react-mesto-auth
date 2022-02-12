@@ -1,52 +1,49 @@
 import React from "react";
+import PreMain from "../PreMain/PreMain";
 
 function Register(props) {
   return(
-    <main>
-      <section className="register">
-        <h3 className=""></h3>
-        <form
-          //className={`popup__form popup__form_type_${props.name}`}
-          //name={props.name}
-          //onSubmit={props.onSubmit}
-          noValidate
-        >
-          <div className="input-box">
+    <PreMain
+      name="register"
+      title="Регистрация"
+      submitText="Зарегистрироваться"
+      //onSubmit={handleSubmit}
+      reg={true}
+    >
+      <>
+        <div className="input-box">
           <input
             required
             minLength="2"
             maxLength="40"
             type="text"
-            //value={name || ''}
-            //onChange={handleNameChange}
+            //value={mail || ''}
+            //onChange={handleMameChange}
             placeholder="Email"
-            id="email-input"
-            className="popup__input popup__input_type_name"
-            name="name"
+            id="mail-input"
+            className="pre-main__input pre-main__input_type_mail"
+            name="mail"
           />
+          <span className="pre-maim__input-error mail-input-error"></span>
+        </div>
 
-          <span className="popup__input-error name-input-error"></span>
-          </div>
-
-          <div className="input-box">
-            <input
-              required
-              minLength="2"
-              maxLength="200"
-              type="text"
-              //value={description || ''}
-              //onChange={handleDescriptionChange}
-              placeholder="Статус"
-              id="status-input"
-              className="popup__input popup__input_type_status"
-              name="status"
-            />
-            <span className="popup__input-error status-input-error"></span>
-          </div>
-          <button type="submit" className="">{/*props.submitText*/}</button>
-				</form>
-      </section>
-    </main>
+        <div className="input-box">
+          <input
+            required
+            minLength="2"
+            maxLength="200"
+            type="text"
+            //value={password || ''}
+            //onChange={handlePasswordChange}
+            placeholder="Пароль"
+            id="password-input"
+            className="pre-main__input pre-main__input_type_password"
+            name="password"
+          />
+          <span className="pre-main__input-error password-input-error"></span>
+        </div>
+      </>
+    </PreMain>
   )
 }
 

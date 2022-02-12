@@ -1,0 +1,19 @@
+.pre-main__subButton {
+  position: absolute;
+  bottom: 0;
+  width: 358px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  line-height: 22px;
+  border: none;
+  border-radius: 2px;
+  transition: opacity 0.25s linear;
+  cursor: pointer;
+  position: absolute;
+}
+
+.pre-main__subButton:hover {
+  opacity: 0.85;
+}

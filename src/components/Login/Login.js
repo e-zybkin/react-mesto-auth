@@ -3,7 +3,13 @@ import PreMain from "../PreMain/PreMain";
 
 function Login(props) {
   return(
-    <PreMain>
+    <PreMain
+      name="login"
+      title="Вход"
+      submitText="Войти"
+      //onSubmit={handleSubmit}
+      reg={false}
+    >
       <>
         <div className="input-box">
           <input
@@ -15,11 +21,10 @@ function Login(props) {
             //onChange={handleMameChange}
             placeholder="Email"
             id="mail-input"
-            className="preMain__input preMain__input_type_mail"
+            className="pre-main__input pre-main__input_type_mail"
             name="mail"
           />
-
-          <span className="preMail__input-error mail-input-error"></span>
+          <span className="pre-main__input-error mail-input-error"></span>
         </div>
 
         <div className="input-box">
@@ -32,10 +37,10 @@ function Login(props) {
             //onChange={handlePasswordChange}
             placeholder="Пароль"
             id="password-input"
-            className="preMain__input preMain__input_type_password"
+            className="pre-main__input pre-main__input_type_password"
             name="password"
           />
-          <span className="preMain__input-error password-input-error"></span>
+          <span className="pre-main__input-error password-input-error"></span>
         </div>
       </>
     </PreMain>

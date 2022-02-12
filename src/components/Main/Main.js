@@ -1,12 +1,14 @@
 import React from "react";
 import Card from "../Card/Card";
+import Footer from "../Footer/Footer";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   return(
-    <main>
+    <>
+      <main>
 			<section className="profile">
 				<div className="profile__cover" onClick={props.onEditAvatar}>
 			    <img className="profile__avatar" src={currentUser.avatar} alt="Аватарка профиля" />
@@ -35,6 +37,8 @@ function Main(props) {
         ))}
 			</section>
 		</main>
+    <Footer />
+    </>
   );
 }
 
