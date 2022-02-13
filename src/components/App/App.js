@@ -157,22 +157,6 @@ function App() {
               }
             />
 
-            {/*<Route
-              path='/react-mesto-auth'
-              element={
-                <Main
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onEditAvatar={handleEditAvatarClick}
-                onCardClick={handleCardClick}
-                cards={cards}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
-                onDeleteButton={handleDeleteButtonClick}
-                />
-              }
-            />*/}
-
             <Route
               path='/sign-up'
               element={
