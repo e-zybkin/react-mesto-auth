@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from  'react-router-dom';
 
 function PreMain(props) {
   return(
@@ -15,8 +16,7 @@ function PreMain(props) {
       {props.reg ?
         <div className="sign-in">
         <p>Уже зарегистрированы?</p>
-        {/*<Link to="login" className="buttons">Войти</Link>*/}
-        <p className="sign-in__link buttons">Войти</p>
+        <Link to="/sign-in" className="sign-in__link buttons">Войти</Link>
         </div> : ''
       }
     </section>

@@ -12,7 +12,7 @@ import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
 import DeleteCardPopup from '../DeleteCardPopup/DeleteCardPopup';
 import api from '../../utils/api';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     api.getUserData()
@@ -137,8 +138,27 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <Header />
           <Routes>
+
             <Route
-              path='/'
+              path="/react-mesto-auth"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <Main
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    cards={cards}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
+                    onDeleteButton={handleDeleteButtonClick}
+                  />
+                </ProtectedRoute>
+              }
+            />
+
+            {/*<Route
+              path='/react-mesto-auth'
               element={
                 <Main
                 onEditProfile={handleEditProfileClick}
@@ -151,7 +171,7 @@ function App() {
                 onDeleteButton={handleDeleteButtonClick}
                 />
               }
-            />
+            />*/}
 
             <Route
               path='/sign-up'
@@ -165,6 +185,11 @@ function App() {
               element={
                 <Login />
               }
+            />
+
+            <Route
+              path='/'
+              element={loggedIn ? <Navigate to="/react-mesto-auth" /> : <Navigate to="/sign-in" />}
             />
           </Routes>
 
@@ -200,7 +225,7 @@ function App() {
           />
 
           <InfoTooltip
-            
+
           />
         </CurrentUserContext.Provider>
       </div>
