@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import PreMain from "../PreMain/PreMain";
 
 function Register(props) {
+  const [formData, setFormData] = useState({
+    mail: '',
+    password: '',
+  })
+
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+  }
+
   return(
     <PreMain
       name="register"
@@ -17,8 +35,8 @@ function Register(props) {
             minLength="2"
             maxLength="40"
             type="text"
-            //value={mail || ''}
-            //onChange={handleMameChange}
+            value={formData.mail || ''}
+            onChange={handleChange}
             placeholder="Email"
             id="mail-input"
             className="pre-main__input pre-main__input_type_mail"
@@ -33,8 +51,8 @@ function Register(props) {
             minLength="2"
             maxLength="200"
             type="password"
-            //value={password || ''}
-            //onChange={handlePasswordChange}
+            value={formData.password || ''}
+            onChange={handleChange}
             placeholder="Пароль"
             id="password-input"
             className="pre-main__input pre-main__input_type_password"
