@@ -12,7 +12,8 @@ import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
 import DeleteCardPopup from '../DeleteCardPopup/DeleteCardPopup';
 import api from '../../utils/api';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import * as auth from '../../auth'
 
 
 function App() {
@@ -21,10 +22,13 @@ function App() {
   const [isEditAvatarPopupOpen, setAvatarPopup] = React.useState(false);
   const [isDeletePopupOpen, setDeletePopup] = React.useState(false);
   const [isImagePopupOpen, setImagePopup] = React.useState(false);
+  const [isInfoToolPopupOpen, setInfoToolPopup] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState('')
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     api.getUserData()
@@ -44,6 +48,19 @@ function App() {
       .catch(error => {
         console.log('ОШИБКА: ', error)
       })
+  }, [])
+
+  React.useEffect(() => {
+    if(localStorage.getItem('jwt')){
+      const jwt = localStorage.getItem('jwt');
+      auth.getContent(jwt)
+      .then((res) => {
+        if(res){
+          setEmail(res.email)
+          setLoggedIn(true)
+        }
+      })
+    }
   }, [])
 
   function handleEditAvatarClick() {
@@ -74,6 +91,7 @@ function App() {
     setAvatarPopup(false);
     setDeletePopup(false);
     setImagePopup(false);
+    setInfoToolPopup(false);
     setSelectedCard({});
   }
 
@@ -132,11 +150,38 @@ function App() {
       })
   }
 
+  function handleLogin(formData) {
+    auth.authorize(formData.password, formData.mail)
+    .then((data) => {
+      console.log(data);
+      localStorage.setItem('jwt', data.token);
+      setLoggedIn(true);
+      navigate('/react-mesto-auth');
+    })
+    .catch((err) => {
+      console.log('ОШИБКА: ', err);
+      setInfoToolPopup(true)
+    })
+  }
+
+  function handleRegister(formData) {
+    auth.register(formData.password, formData.mail)
+    .then((res) => {
+      navigate('/sign-in')
+    })
+    .catch((err) => {
+      console.log('ОШИБКА: ', err);
+      setInfoToolPopup(true)
+    })
+  }
+
   return (
     <div className="page">
       <div className="wrapper">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header />
+          <Header
+            email={email}
+          />
           <Routes>
 
             <Route
@@ -160,14 +205,18 @@ function App() {
             <Route
               path='/sign-up'
               element={
-                <Register />
+                <Register
+                  handleRegister={handleRegister}
+                />
               }
             />
 
             <Route
               path='/sign-in'
               element={
-                <Login />
+                <Login
+                  handleLogin={handleLogin}
+                />
               }
             />
 
@@ -209,7 +258,8 @@ function App() {
           />
 
           <InfoTooltip
-
+            isOpen={isInfoToolPopupOpen}
+            onClose={closeAllPopups}
           />
         </CurrentUserContext.Provider>
       </div>
