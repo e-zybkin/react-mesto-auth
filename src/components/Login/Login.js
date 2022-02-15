@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import PreMain from "../PreMain/PreMain";
-//import * as auth from '../../auth';
-//import { useHistory } from 'react-router-dom';
 
 function Login(props) {
-  //const history = useHistory();
   const [formData, setFormData] = useState({
     mail: '',
     password: '',
@@ -22,15 +19,6 @@ function Login(props) {
     e.preventDefault();
     props.handleLogin(formData);
     setFormData({mail:'', password:''});
-    /*auth.authorize(formData.password, formData.mail)
-    .then((data) => {
-      if (data.jwt){
-        setFormData({mail:'', password:''});
-        props.handleLogin();
-        history.push('/react-mesto-auth');
-      }
-    })
-    .catch((err) => console.log('ОШИБКА: ', err))*/
   }
 
   return(

@@ -1,24 +1,18 @@
 import React from "react";
 import logoPic from '../../images/logo.svg';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Header(props) {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  function signOut() {
-    localStorage.removeItem('jwt');
-    navigate('/sign-in');
-  }
 
   function handleHeaderLink() {
     switch (location.pathname) {
-        case '/react-mesto-auth':
+        case '/':
           return(
-            <>
+            <div className="header__user-info">
               <p className="header__elements">{props.email}</p>
-              <button onClick={signOut} className="header__elements buttons">Выйти</button>
-            </>
+              <Link to="/sign-in" onClick={props.onClick} className="header__signout-button buttons">Выйти</Link>
+            </div>
           );
 
         case '/sign-in':

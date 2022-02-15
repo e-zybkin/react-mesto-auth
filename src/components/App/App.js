@@ -23,6 +23,7 @@ function App() {
   const [isDeletePopupOpen, setDeletePopup] = React.useState(false);
   const [isImagePopupOpen, setImagePopup] = React.useState(false);
   const [isInfoToolPopupOpen, setInfoToolPopup] = React.useState(false);
+  const [isAccessSuccess, setAcces] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -56,8 +57,9 @@ function App() {
       auth.getContent(jwt)
       .then((res) => {
         if(res){
-          setEmail(res.email)
+          setEmail(res.data.email)
           setLoggedIn(true)
+          navigate('/');
         }
       })
     }
@@ -153,13 +155,14 @@ function App() {
   function handleLogin(formData) {
     auth.authorize(formData.password, formData.mail)
     .then((data) => {
-      console.log(data);
       localStorage.setItem('jwt', data.token);
       setLoggedIn(true);
-      navigate('/react-mesto-auth');
+      setEmail(formData.mail);
+      navigate('/');
     })
     .catch((err) => {
       console.log('ОШИБКА: ', err);
+      setAcces(false);
       setInfoToolPopup(true)
     })
   }
@@ -167,12 +170,20 @@ function App() {
   function handleRegister(formData) {
     auth.register(formData.password, formData.mail)
     .then((res) => {
-      navigate('/sign-in')
+      setAcces(true);
+      navigate('/sign-in');
+      setInfoToolPopup(true);
     })
     .catch((err) => {
       console.log('ОШИБКА: ', err);
-      setInfoToolPopup(true)
+      setAcces(false);
+      setInfoToolPopup(true);
     })
+  }
+
+  function signOut() {
+    localStorage.removeItem('jwt');
+    setEmail('');
   }
 
   return (
@@ -181,11 +192,12 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <Header
             email={email}
+            onClick={signOut}
           />
           <Routes>
 
             <Route
-              path="/react-mesto-auth"
+              path="/"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Main
@@ -222,7 +234,7 @@ function App() {
 
             <Route
               path='/'
-              element={loggedIn ? <Navigate to="/react-mesto-auth" /> : <Navigate to="/sign-in" />}
+              element={loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />}
             />
           </Routes>
 
@@ -260,6 +272,7 @@ function App() {
           <InfoTooltip
             isOpen={isInfoToolPopupOpen}
             onClose={closeAllPopups}
+            isAccessSuccess={isAccessSuccess}
           />
         </CurrentUserContext.Provider>
       </div>
