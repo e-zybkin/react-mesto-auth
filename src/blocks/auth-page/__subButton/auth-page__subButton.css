@@ -1,4 +1,4 @@
-.pre-main__subButton {
+.auth-page__subButton {
   position: absolute;
   bottom: 0;
   width: 358px;
@@ -14,6 +14,6 @@
   position: absolute;
 }
 
-.pre-main__subButton:hover {
+.auth-page__subButton:hover {
   opacity: 0.85;
 }

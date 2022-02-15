@@ -28,21 +28,19 @@ function EditAvatarPopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
     >
-      <>
-        <div className="input-box input-box_type_avatar">
-          <input
-            required
-            type="url"
-            value={avatar || ''}
-            onChange={handleAvatarChange}
-            placeholder="Ссылка на картинку"
-            id="avatar-input"
-            className="popup__input popup__input_type_avatar"
-            name="link"
-          />
-          <span className="popup__input-error avatar-input-error"></span>
-				</div>
-      </>
+      <div className="input-box input-box_type_avatar">
+        <input
+          required
+          type="url"
+          value={avatar || ''}
+          onChange={handleAvatarChange}
+          placeholder="Ссылка на картинку"
+          id="avatar-input"
+          className="popup__input popup__input_type_avatar"
+          name="link"
+        />
+        <span className="popup__input-error avatar-input-error"></span>
+			</div>
     </PopupWithForm>
   )
 }

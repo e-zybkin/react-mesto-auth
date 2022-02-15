@@ -51,12 +51,11 @@
 @import url(./blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(./blocks/popup/__save-btn/popup__save-btn.css);
 @import url(./blocks/popup/__save-btn/_disabled/popup__save-btn_disabled.css);
-
-@import url(./blocks/pre-main/pre-main.css);
-@import url(./blocks/pre-main/__form/pre-main__form.css);
-@import url(./blocks/pre-main/__input/pre-main__input.css);
-@import url(./blocks/pre-main/__subButton/pre-main__subButton.css);
-@import url(./blocks/pre-main/__title/pre-main__title.css);
+@import url(./blocks/auth-page/auth-page.css);
+@import url(./blocks/auth-page/__form/auth-page__form.css);
+@import url(./blocks/auth-page/__input/auth-page__input.css);
+@import url(./blocks/auth-page/__subButton/auth-page__subButton.css);
+@import url(./blocks/auth-page/__title/auth-page__title.css);
 @import url(./blocks/sign-in/sign-in.css);
 @import url(./blocks/sign-in/__link/sign-in__link.css);
 @import url(./blocks/popup/__info-pic/popup__info-pic.css);

@@ -13,17 +13,17 @@ import DeleteCardPopup from '../DeleteCardPopup/DeleteCardPopup';
 import api from '../../utils/api';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
-import * as auth from '../../auth'
+import * as auth from '../../utils/auth'
 
 
 function App() {
-  const [isEditProfilePopupOpen, setProfilePopup] = React.useState(false);
-  const [isAddPlacePopupOpen, setPlacePopup] = React.useState(false);
-  const [isEditAvatarPopupOpen, setAvatarPopup] = React.useState(false);
-  const [isDeletePopupOpen, setDeletePopup] = React.useState(false);
-  const [isImagePopupOpen, setImagePopup] = React.useState(false);
-  const [isInfoToolPopupOpen, setInfoToolPopup] = React.useState(false);
-  const [isAccessSuccess, setAcces] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [isInfoToolPopupOpen, setIsInfoToolPopupOpen] = React.useState(false);
+  const [isAccessSuccess, setIsAccessSuccess] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -62,38 +62,41 @@ function App() {
           navigate('/');
         }
       })
+      .catch(error => {
+        console.log('ОШИБКА: ', error)
+      })
     }
   }, [])
 
   function handleEditAvatarClick() {
-    setAvatarPopup(true);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setProfilePopup(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    setPlacePopup(true);
+    setIsAddPlacePopupOpen(true);
   }
 
   function handleDeleteButtonClick(card) {
-    setDeletePopup(true);
+    setIsDeletePopupOpen(true);
     setSelectedCard(card);
   }
 
   function handleCardClick(card) {
-    setImagePopup(true)
+    setIsImagePopupOpen(true)
     setSelectedCard(card)
   }
 
   function closeAllPopups() {
-    setProfilePopup(false);
-    setPlacePopup(false);
-    setAvatarPopup(false);
-    setDeletePopup(false);
-    setImagePopup(false);
-    setInfoToolPopup(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsDeletePopupOpen(false);
+    setIsImagePopupOpen(false);
+    setIsInfoToolPopupOpen(false);
     setSelectedCard({});
   }
 
@@ -154,31 +157,32 @@ function App() {
 
   function handleLogin(formData) {
     auth.authorize(formData.password, formData.mail)
-    .then((data) => {
-      localStorage.setItem('jwt', data.token);
-      setLoggedIn(true);
-      setEmail(formData.mail);
-      navigate('/');
-    })
-    .catch((err) => {
-      console.log('ОШИБКА: ', err);
-      setAcces(false);
-      setInfoToolPopup(true)
-    })
+      .then((data) => {
+        localStorage.setItem('jwt', data.token);
+        setLoggedIn(true);
+        setEmail(formData.mail);
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log('ОШИБКА: ', err);
+        setIsAccessSuccess(false);
+        setIsInfoToolPopupOpen(true)
+      })
   }
 
   function handleRegister(formData) {
     auth.register(formData.password, formData.mail)
-    .then((res) => {
-      setAcces(true);
-      navigate('/sign-in');
-      setInfoToolPopup(true);
-    })
-    .catch((err) => {
-      console.log('ОШИБКА: ', err);
-      setAcces(false);
-      setInfoToolPopup(true);
-    })
+      .then((res) => {
+        setIsAccessSuccess(true);
+        navigate('/sign-in');
+      })
+      .catch((err) => {
+        console.log('ОШИБКА: ', err);
+        setIsAccessSuccess(false);
+      })
+      .finally(() => {
+        setIsInfoToolPopupOpen(true);
+      })
   }
 
   function signOut() {

@@ -1,17 +1,16 @@
 import React from "react";
 import {Link} from  'react-router-dom';
 
-function PreMain(props) {
+function AuthPage(props) {
   return(
-    <section className="pre-main">
-      <h3 className="pre-main__title">{props.title}</h3>
+    <section className="auth-page">
+      <h3 className="auth-page__title">{props.title}</h3>
       <form
-        className={`pre-main__form pre-main__form_type_${props.name}`}
+        className={`auth-page__form auth-page__form_type_${props.name}`}
         name={props.name}
-        onSubmit={props.onSubmit}
-        noValidate>
+        onSubmit={props.onSubmit}>
         {props.children}
-        <button type="submit" className="pre-main__subButton">{props.submitText}</button>
+        <button type="submit" className="auth-page__subButton">{props.submitText}</button>
 			</form>
       {props.reg ?
         <div className="sign-in">
@@ -23,4 +22,4 @@ function PreMain(props) {
   )
 }
 
-export default PreMain;
+export default AuthPage;

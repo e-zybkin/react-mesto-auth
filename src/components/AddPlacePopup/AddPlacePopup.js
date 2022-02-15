@@ -35,39 +35,35 @@ function AddPlacePopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
     >
-      <>
-        <div className="input-box">
-          <input
-            required
-            minLength="2"
-            maxLength="30"
-            type="text"
-            value={name || ''}
-            onChange={handleNameChange}
-            placeholder="Название"
-            id="place-input"
-            className="popup__input popup__input_type_title"
-            name="name"
-          />
+      <div className="input-box">
+        <input
+          required
+          minLength="2"
+          maxLength="30"
+          type="text"
+          value={name || ''}
+          onChange={handleNameChange}
+          placeholder="Название"
+          id="place-input"
+          className="popup__input popup__input_type_title"
+          name="name"
+        />
+        <span className="popup__input-error place-input-error"></span>
+			</div>
 
-          <span className="popup__input-error place-input-error"></span>
-				</div>
-
-				<div className="input-box">
-          <input
-            required
-            type="url"
-            value={link || ''}
-            onChange={handleLinkChange}
-            placeholder="Ссылка на картинку"
-            id="pic-input"
-            className="popup__input popup__input_type_pic"
-            name="link"
-          />
-
-          <span className="popup__input-error pic-input-error"></span>
-				</div>
-      </>
+  		<div className="input-box">
+        <input
+          required
+          type="url"
+          value={link || ''}
+          onChange={handleLinkChange}
+          placeholder="Ссылка на картинку"
+          id="pic-input"
+          className="popup__input popup__input_type_pic"
+          name="link"
+        />
+        <span className="popup__input-error pic-input-error"></span>
+			</div>
     </PopupWithForm>
   );
 }

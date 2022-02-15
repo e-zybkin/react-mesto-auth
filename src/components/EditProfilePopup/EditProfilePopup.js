@@ -37,40 +37,37 @@ function EditProfilePopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
     >
-      <>
-        <div className="input-box">
-          <input
-            required
-            minLength="2"
-            maxLength="40"
-            type="text"
-            value={name || ''}
-            onChange={handleNameChange}
-            placeholder="Имя профиля"
-            id="name-input"
-            className="popup__input popup__input_type_name"
-            name="name"
-          />
+      <div className="input-box">
+        <input
+          required
+          minLength="2"
+          maxLength="40"
+          type="text"
+          value={name || ''}
+          onChange={handleNameChange}
+          placeholder="Имя профиля"
+          id="name-input"
+          className="popup__input popup__input_type_name"
+          name="name"
+        />
+        <span className="popup__input-error name-input-error"></span>
+      </div>
 
-          <span className="popup__input-error name-input-error"></span>
-        </div>
-
-        <div className="input-box">
-          <input
-            required
-            minLength="2"
-            maxLength="200"
-            type="text"
-            value={description || ''}
-            onChange={handleDescriptionChange}
-            placeholder="Статус"
-            id="status-input"
-            className="popup__input popup__input_type_status"
-            name="status"
-          />
-          <span className="popup__input-error status-input-error"></span>
-        </div>
-      </>
+      <div className="input-box">
+        <input
+          required
+          minLength="2"
+          maxLength="200"
+          type="text"
+          value={description || ''}
+          onChange={handleDescriptionChange}
+          placeholder="Статус"
+          id="status-input"
+          className="popup__input popup__input_type_status"
+          name="status"
+        />
+        <span className="popup__input-error status-input-error"></span>
+      </div>
     </PopupWithForm>
   );
 }
