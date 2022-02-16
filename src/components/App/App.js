@@ -52,16 +52,6 @@ function App() {
   }, [])
 
   React.useEffect(() => {
-    const closeByEscape = (e) => {
-      if (e.key === 'Escape') {
-        closeAllPopups();
-      }
-    }
-    document.addEventListener('keydown', closeByEscape)
-    return () => document.removeEventListener('keydown', closeByEscape)
-  }, [])
-
-  React.useEffect(() => {
     if(localStorage.getItem('jwt')){
       const jwt = localStorage.getItem('jwt');
       auth.getContent(jwt)
