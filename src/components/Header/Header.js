@@ -10,7 +10,7 @@ function Header(props) {
         case '/':
           return(
             <div className="header__user-info">
-              <p className="header__elements">{props.email}</p>
+              <p className="header__email">{props.email}</p>
               <Link to="/sign-in" onClick={props.onClick} className="header__signout-button buttons">Выйти</Link>
             </div>
           );
@@ -19,15 +19,15 @@ function Header(props) {
           return(
             <Link
               to="/sign-up"
-              className="header__elements buttons"
-            >Зарегистрироваться</Link>
+              className="header__auth-btns buttons"
+            >Регистрация</Link>
           );
 
         case '/sign-up':
           return(
             <Link
               to="/sign-in"
-              className="header__elements buttons"
+              className="header__auth-btns buttons"
             >Войти</Link>
           );
       }
